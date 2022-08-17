@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-test-service-app
+  labels:
+    app: user-test-service-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-test-service-app
+  template:
+    metadata:
+      labels:
+        app: user-test-service-app
+    spec:
+      containers:
+      - name: user-test-service-app
+        image: kelvinrichnguyen/user-test-service:0.0.1
+        ports:
+        - containerPort: 8200
+        env:   # Setting Enviornmental Variables
+          - name: DB_HOST   # Setting Database host address from configMap
+            valueFrom :
+                configMapKeyRef :
+                  name : db-config
+                  key :  host
+
+          - name: DB_NAME  # Setting Database name from configMap
+            valueFrom :
+                configMapKeyRef :
+                  name : db-config
+                  key :  dbName
+
+          - name: DB_USERNAME  # Setting Database username from Secret
+            valueFrom :
+                secretKeyRef :
+                  name : mysql-secrets
+                  key :  username
+
+          - name: DB_PASSWORD # Setting Database password from Secret
+            valueFrom :
+                secretKeyRef :
+                  name : mysql-secrets
+                  key :  password
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-test-service-svc
+spec:
+  selector:
+    app: user-test-service-app
+  ports:
+  - port: 80
+    targetPort: 8200
