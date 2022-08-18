@@ -1,4 +1,4 @@
-package com.microserviceDemo.userService;
+package com.microservice.demo.user;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
