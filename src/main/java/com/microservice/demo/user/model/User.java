@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
 	@Id
@@ -16,39 +16,39 @@ public class User {
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "username")
-	private String username;
+	@Column(name = "name")
+	private String name;
 
-	@Column(name = "password")
-	private String password;
+	@Column(name = "email")
+	private String email;
 
-	@Column(name = "account_non_locked")
-	private boolean accountNonLocked;
+	@Column(name = "product_id")
+	private int productId;
 	
 	public User() {
 		
 	}
 
-	public User(String username, String password, boolean accountNonLocked) {
-		this.username = username;
-		this.password = password;
-		this.accountNonLocked = accountNonLocked;
+	public User(String name, String email, int productId) {
+		this.name = name;
+		this.email = email;
+		this.productId = productId;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public int getId() {
@@ -59,12 +59,12 @@ public class User {
 		this.id = id;
 	}
 
-	public boolean isAccountNonLocked() {
-		return accountNonLocked;
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setAccountNonLocked(boolean accountNonLocked) {
-		this.accountNonLocked = accountNonLocked;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
-
+	
 }
